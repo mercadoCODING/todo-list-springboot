@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/globals.css}" />
+  </head>
+  <body>
+    <nav class="navbar" th:fragment="navbar-fragment">
+      <div class="navbar-container">
+        <div class="navbar-item-container">
+          <a class="navbar-item" href="/todo-list">Home</a>
+          <a class="navbar-item" href="/todo-list/todo-list">Todo List</a>
+          <a class="navbar-item" href="/todo-list/todo">Add Todo</a>
+        </div>
+      </div>
+    </nav>
+  </body>
+</html>

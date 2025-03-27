@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Todo List</title>
+    <link rel="stylesheet" th:href="@{/css/table-display.css}" />
+  </head>
+  <body>
+    <nav th:replace="~{layout :: navbar-fragment}"></nav>
+    <h1>Todo List</h1>
+    <div class="button-container">
+      <div class="button-container">
+        <button class="create-button" onclick="openModal()">
+          Create New Task
+        </button>
+      </div>
+      <div class="table-container">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Description</th>
+              <th>Timestamp</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--data must be passed here-->
+          </tbody>
+        </table>
+      </div>
 
-</body>
+      <div id="createTaskModal" class="modal">
+        <form id="createTaskForm" method="post" th:action="@{/todo/create}" th:object="${task}">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Create Task</h2>
+              <button class="close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="form-row">
+                <label for="task">Task:</label>
+                <input type="text" id="task" name="task" required th:field="${task.taskName}"  />
+  
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" required />
+  
+                <label for="timestamp">Timestamp:</label>
+                <input type="time" id="timestamp" name="timestamp" required />
+  
+                <label for="status">Status:</label>
+                <select id="status" name="status" required  >
+                  <option value="">Select status</option>
+                  <option value="pending">Pending</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit">Create Task</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      </div>
+    </div>
+    <script>
+      function openModal() {
+        document.getElementById("createTaskModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("createTaskModal").style.display = "none";
+      }
+
+      window.onclick = function (event) {
+        const modal = document.getElementById("createTaskModal");
+        if (event.target === modal) {
+          closeModal();
+        }
+      };
+    </script>
+  </body>
 </html>
